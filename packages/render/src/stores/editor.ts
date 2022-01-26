@@ -19,6 +19,11 @@ export const useEditorStore = defineStore('useEditorStore', {
       this.view = view;
       this.isMounted = true;
     },
+    unMountCodeMirror() {
+      this.view.destroy();
+      this.isMounted = false;
+      this.markdown = '';
+    },
     setMarkdownContent(content: string) {
       this.markdown = content;
     },

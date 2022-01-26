@@ -1,4 +1,4 @@
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
@@ -104,6 +104,10 @@ export const useCodeMirror = () => {
 
       editorStore.mountCodeMirror(view);
     }
+  });
+
+  onUnmounted(() => {
+    editorStore.unMountCodeMirror();
   });
 
   return {

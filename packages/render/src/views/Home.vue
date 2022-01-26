@@ -8,7 +8,7 @@
 </script>
 
 <template>
-  <div class="flex flex-col lg:flex-row w-[calc(100%-5rem)]">
+  <div class="flex flex-col lg:flex-row w-[calc(100%-52px)]">
     <editor />
     <preview :content="markdownContent" />
   </div>
