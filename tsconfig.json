@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@/*": ["./packages/render/src/*"]
+    },
+    "outDir": "./build"
+  },
+  "include": [
+    "packages",
+    "packages/render/src/**/*.ts",
+    "packages/render/src/**/*.d.ts",
+    "packages/render/src/**/*.tsx",
+    "packages/render/src/**/*.vue"
+  ]
+}
