@@ -26,7 +26,8 @@
     "github-markdown-css": "^5.1.0",
     "marked": "^4.0.10",
     "pinia": "^2.0.9",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
