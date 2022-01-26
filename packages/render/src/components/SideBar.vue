@@ -1,6 +1,6 @@
 <template>
   <nav class="block bg-one-dark border-r-2 border-one-dark-100">
-    <div class="w-20 flex flex-col p-3 space-y-3">
+    <div class="w-[78px] flex flex-col p-3 space-y-3">
       <a
         href="#"
         class="bg-one-dark hover:bg-one-dark-200 text-white flex-shrink-0 inline-flex items-center justify-center h-14 w-14 rounded-lg"
