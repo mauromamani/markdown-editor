@@ -1,6 +1,6 @@
 import { computed, onMounted } from 'vue';
 
-import { EditorState, StateEffect } from '@codemirror/state';
+import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
@@ -16,15 +16,24 @@ import { useEditorStore } from '@/stores/editor';
 export const useCodeMirror = () => {
   const editorStore = useEditorStore();
 
-  // theme
+  /**
+   * Theme
+   */
   const theme = EditorView.theme({
     '&': {
       height: '100%',
+    },
+    '.cm-content': {
       padding: '1rem',
+    },
+    '.cm-lineNumbers .cm-gutterElement': {
+      float: 'left',
     },
   });
 
-  // highlight
+  /**
+   * Highlight
+   */
   const syntaxHighlighting = HighlightStyle.define([
     {
       tag: tags.heading1,
@@ -43,30 +52,45 @@ export const useCodeMirror = () => {
     },
   ]);
 
-  // Extensions
-  let timer: NodeJS.Timeout;
+  /**
+   * Compartments
+   */
+  const lineNumberCompartment = new Compartment();
+  const themeCompartment = new Compartment();
+
+  /**
+   * Compartments Setup
+   */
+  const setLineNumbers = (b: boolean) => {
+    editorStore.view.dispatch({
+      effects: lineNumberCompartment.reconfigure(b ? [lineNumbers()] : []),
+    });
+  };
+
+  /**
+   * Extensions
+   */
   const extensions = [
     EditorView.lineWrapping,
     keymap.of(defaultKeymap),
-    defaultHighlightStyle.fallback,
-    lineNumbers(),
+    lineNumberCompartment.of(lineNumbers()),
     highlightActiveLineGutter(),
     markdown({
       base: markdownLanguage,
     }),
-    oneDark,
+    themeCompartment.of(oneDark),
     theme,
     syntaxHighlighting,
     EditorView.updateListener.of((v) => {
-      // tiny timer
       if (v.docChanged) {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          editorStore.setMarkdownContent(v.state.doc.toString());
-        }, 50);
+        editorStore.setMarkdownContent(v.state.doc.toString());
       }
     }),
   ];
+
+  /**
+   * Mount CodeMirror
+   */
   onMounted(() => {
     if (!editorStore.getIsMounted) {
       const startState = EditorState.create({
@@ -82,14 +106,8 @@ export const useCodeMirror = () => {
     }
   });
 
-  const add = () => {
-    editorStore.view.dispatch({
-      effects: StateEffect.reconfigure.of([...extensions, ...[lineNumbers()]]),
-    });
-  };
-
   return {
     markdownContent: computed(() => editorStore.getMarkdownContent),
-    add,
+    setLineNumbers,
   };
 };
