@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted } from 'vue';
 
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
@@ -6,11 +6,7 @@ import { oneDark } from '@codemirror/theme-one-dark';
 import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
 import { defaultKeymap } from '@codemirror/commands';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
-import {
-  defaultHighlightStyle,
-  HighlightStyle,
-  tags,
-} from '@codemirror/highlight';
+import { HighlightStyle, tags } from '@codemirror/highlight';
 import { useEditorStore } from '@/stores/editor';
 
 export const useCodeMirror = () => {
@@ -61,9 +57,11 @@ export const useCodeMirror = () => {
   /**
    * Compartments Setup
    */
-  const setLineNumbers = (b: boolean) => {
+  const setLineNumbersConfig = () => {
     editorStore.view.dispatch({
-      effects: lineNumberCompartment.reconfigure(b ? [lineNumbers()] : []),
+      effects: lineNumberCompartment.reconfigure(
+        editorStore.getEnableLineNumbers ? [lineNumbers()] : []
+      ),
     });
   };
 
@@ -73,7 +71,7 @@ export const useCodeMirror = () => {
   const extensions = [
     EditorView.lineWrapping,
     keymap.of(defaultKeymap),
-    lineNumberCompartment.of(lineNumbers()),
+    lineNumberCompartment.of([]),
     highlightActiveLineGutter(),
     markdown({
       base: markdownLanguage,
@@ -92,26 +90,21 @@ export const useCodeMirror = () => {
    * Mount CodeMirror
    */
   onMounted(() => {
-    if (!editorStore.getIsMounted) {
-      const startState = EditorState.create({
-        extensions,
-      });
+    const startState = EditorState.create({
+      extensions,
+    });
 
-      const view = new EditorView({
-        state: startState,
-        parent: document.getElementById('editor') as Element,
-      });
+    const view = new EditorView({
+      state: startState,
+      parent: document.getElementById('editor') as Element,
+    });
 
-      editorStore.mountCodeMirror(view);
-    }
-  });
-
-  onUnmounted(() => {
-    editorStore.unMountCodeMirror();
+    editorStore.mountCodeMirror(view);
+    setLineNumbersConfig();
   });
 
   return {
     markdownContent: computed(() => editorStore.getMarkdownContent),
-    setLineNumbers,
+    setLineNumbersConfig,
   };
 };

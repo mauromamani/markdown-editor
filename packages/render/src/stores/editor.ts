@@ -5,6 +5,7 @@ interface State {
   view: EditorView;
   markdown: string;
   isMounted: boolean;
+  enableLineNumbers: boolean;
 }
 
 export const useEditorStore = defineStore('useEditorStore', {
@@ -12,6 +13,7 @@ export const useEditorStore = defineStore('useEditorStore', {
     ({
       view: {},
       markdown: '',
+      enableLineNumbers: true,
       isMounted: false,
     } as State),
   actions: {
@@ -19,17 +21,16 @@ export const useEditorStore = defineStore('useEditorStore', {
       this.view = view;
       this.isMounted = true;
     },
-    unMountCodeMirror() {
-      this.view.destroy();
-      this.isMounted = false;
-      this.markdown = '';
-    },
     setMarkdownContent(content: string) {
       this.markdown = content;
+    },
+    setEnableLineNumbers(enable: boolean) {
+      this.enableLineNumbers = enable;
     },
   },
   getters: {
     getMarkdownContent: (state) => state.markdown,
+    getEnableLineNumbers: (state) => state.enableLineNumbers,
     getIsMounted: (state) => state.isMounted,
   },
 });
