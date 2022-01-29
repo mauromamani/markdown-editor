@@ -4,9 +4,8 @@ import { marked } from 'marked';
 
 interface State {
   view: EditorView;
-  content: string;
-  markdown: string;
-  isMounted: boolean;
+  docContent: string;
+  markdownContent: string;
   enableLineNumbers: boolean;
 }
 
@@ -14,36 +13,32 @@ export const useEditorStore = defineStore('useEditorStore', {
   state: () =>
     ({
       view: {},
-      markdown: '',
-      content: '',
+      markdownContent: '',
+      docContent: '',
       enableLineNumbers: true,
-      isMounted: false,
     } as State),
   actions: {
     mountCodeMirror(view: EditorView) {
       this.view = view;
-      this.isMounted = true;
     },
     unMountCodeMirror() {
       this.view.destroy();
-      this.isMounted = false;
-      this.markdown = '';
+      this.markdownContent = '';
     },
-    setContent(content: string) {
-      this.content = content;
-      this.markdown = marked.parse(content);
+    setDocContent(content: string) {
+      this.docContent = content;
+      this.markdownContent = marked.parse(content);
     },
-    setMarkDownContent(content: string) {
-      this.markdown = marked.parse(content);
+    setMarkdownContent(content: string) {
+      this.markdownContent = marked.parse(content);
     },
     setEnableLineNumbers(enable: boolean) {
       this.enableLineNumbers = enable;
     },
   },
   getters: {
-    getMarkdownContent: (state) => state.markdown,
-    getContent: (state) => state.content,
+    getMarkdownContent: (state) => state.markdownContent,
+    getDocContent: (state) => state.docContent,
     getEnableLineNumbers: (state) => state.enableLineNumbers,
-    getIsMounted: (state) => state.isMounted,
   },
 });

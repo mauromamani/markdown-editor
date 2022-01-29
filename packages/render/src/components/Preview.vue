@@ -1,10 +1,13 @@
 <script setup lang="ts">
-  import { useEditorStore } from '@/stores/editor';
-  import { computed } from 'vue';
+  import { computed, defineProps } from 'vue';
 
-  const editorStore = useEditorStore();
+  interface Props {
+    markdownContent: string;
+  }
 
-  const content = computed(() => editorStore.getMarkdownContent);
+  const props = defineProps<Props>();
+
+  const content = computed(() => props.markdownContent);
 </script>
 
 <template>

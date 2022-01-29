@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
@@ -51,15 +51,14 @@ export const useCodeMirror = () => {
   /**
    * Compartments
    */
-  const lineNumberCompartment = new Compartment();
-  const themeCompartment = new Compartment();
+  const lineNumbersCompartment = new Compartment();
 
   /**
    * Compartments Setup
    */
-  const setLineNumbersConfig = () => {
+  const lineNumbersConfig = () => {
     editorStore.view.dispatch({
-      effects: lineNumberCompartment.reconfigure(
+      effects: lineNumbersCompartment.reconfigure(
         editorStore.getEnableLineNumbers ? [lineNumbers()] : []
       ),
     });
@@ -71,17 +70,17 @@ export const useCodeMirror = () => {
   const extensions = [
     EditorView.lineWrapping,
     keymap.of(defaultKeymap),
-    lineNumberCompartment.of([]),
+    lineNumbersCompartment.of([]),
     highlightActiveLineGutter(),
     markdown({
       base: markdownLanguage,
     }),
-    themeCompartment.of(oneDark),
+    oneDark,
     theme,
     syntaxHighlighting,
     EditorView.updateListener.of((v) => {
       if (v.docChanged) {
-        editorStore.setContent(v.state.doc.toString());
+        editorStore.setDocContent(v.state.doc.toString());
       }
     }),
   ];
@@ -90,9 +89,10 @@ export const useCodeMirror = () => {
    * Mount CodeMirror
    */
   onMounted(() => {
+    console.log('codemirror mounted');
     const startState = EditorState.create({
       extensions,
-      doc: editorStore.getContent,
+      doc: editorStore.getDocContent,
     });
 
     const view = new EditorView({
@@ -102,9 +102,9 @@ export const useCodeMirror = () => {
 
     editorStore.mountCodeMirror(view);
 
-    // Load settings and text content from state
-    editorStore.setMarkDownContent(editorStore.getContent);
-    setLineNumbersConfig();
+    // Load settings and doc content from state
+    editorStore.setMarkdownContent(editorStore.getDocContent);
+    lineNumbersConfig();
   });
 
   onUnmounted(() => {
@@ -112,6 +112,6 @@ export const useCodeMirror = () => {
   });
 
   return {
-    setLineNumbersConfig,
+    markdownContent: computed(() => editorStore.getMarkdownContent),
   };
 };
