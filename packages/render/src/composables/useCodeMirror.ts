@@ -1,4 +1,4 @@
-import { computed, onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
@@ -81,7 +81,7 @@ export const useCodeMirror = () => {
     syntaxHighlighting,
     EditorView.updateListener.of((v) => {
       if (v.docChanged) {
-        editorStore.setMarkdownContent(v.state.doc.toString());
+        editorStore.setContent(v.state.doc.toString());
       }
     }),
   ];
@@ -92,6 +92,7 @@ export const useCodeMirror = () => {
   onMounted(() => {
     const startState = EditorState.create({
       extensions,
+      doc: editorStore.getContent,
     });
 
     const view = new EditorView({
@@ -100,11 +101,17 @@ export const useCodeMirror = () => {
     });
 
     editorStore.mountCodeMirror(view);
+
+    // Load settings and text content from state
+    editorStore.setMarkDownContent(editorStore.getContent);
     setLineNumbersConfig();
   });
 
+  onUnmounted(() => {
+    editorStore.unMountCodeMirror();
+  });
+
   return {
-    markdownContent: computed(() => editorStore.getMarkdownContent),
     setLineNumbersConfig,
   };
 };

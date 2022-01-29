@@ -4,12 +4,12 @@
   import { useCodeMirror } from '@/composables/useCodeMirror';
 
   // mount codemirror
-  const { markdownContent } = useCodeMirror();
+  useCodeMirror();
 </script>
 
 <template>
   <div class="flex flex-col lg:flex-row w-[calc(100%-52px)]">
     <editor />
-    <preview :content="markdownContent" />
+    <preview />
   </div>
 </template>

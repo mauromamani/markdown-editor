@@ -1,14 +1,10 @@
 <script setup lang="ts">
-  import { marked } from 'marked';
+  import { useEditorStore } from '@/stores/editor';
   import { computed } from 'vue';
 
-  interface IProps {
-    content: string;
-  }
+  const editorStore = useEditorStore();
 
-  // eslint-disable-next-line no-undef
-  const props = defineProps<IProps>();
-  const content = computed(() => marked.parse(props.content));
+  const content = computed(() => editorStore.getMarkdownContent);
 </script>
 
 <template>
