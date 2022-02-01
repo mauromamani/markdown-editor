@@ -22,9 +22,7 @@ export const useCodeMirror = () => {
     '.cm-content': {
       padding: '1rem',
     },
-    '.cm-lineNumbers .cm-gutterElement': {
-      float: 'left',
-    },
+    '.cm-lineNumbers .cm-gutterElement': {},
   });
 
   /**
