@@ -2,7 +2,7 @@ import { EditorView } from '@codemirror/view';
 import { defineStore } from 'pinia';
 import { marked } from 'marked';
 
-interface State {
+interface EditorState {
   view: EditorView;
   docContent: string;
   markdownContent: string;
@@ -16,7 +16,7 @@ export const useEditorStore = defineStore('useEditorStore', {
       markdownContent: '',
       docContent: '',
       enableLineNumbers: true,
-    } as State),
+    } as EditorState),
   actions: {
     mountCodeMirror(view: EditorView) {
       this.view = view;
