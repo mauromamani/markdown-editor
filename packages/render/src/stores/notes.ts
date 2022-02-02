@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { marked } from 'marked';
 
 interface NotesStoreState {
   currentNote: Note;
@@ -11,11 +12,13 @@ interface Note {
 }
 
 export const useNotesStore = defineStore('useNotesStore', {
-  state: () =>
-    ({
-      currentNote: {},
-      notes: [{}],
-    } as NotesStoreState),
+  state: (): NotesStoreState => ({
+    currentNote: {
+      id: 0,
+      content: '# Create a New Note!',
+    },
+    notes: [],
+  }),
   actions: {
     createNewNote(noteContent: string) {
       const newNote = {
@@ -25,5 +28,18 @@ export const useNotesStore = defineStore('useNotesStore', {
 
       this.notes.push(newNote);
     },
+    saveNote(note: Note) {
+      this.notes.push(note);
+    },
+    setCurrentNote(note: Note) {
+      this.currentNote = note;
+    },
+    updateNote(noteContent: string) {
+      this.currentNote.content = noteContent;
+    },
+  },
+  getters: {
+    getCurrentNote: (state) => state.currentNote,
+    getMarkdownContent: (state) => marked(state.currentNote.content),
   },
 });

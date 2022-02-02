@@ -8,7 +8,6 @@
   const props = defineProps<Props>();
 
   const content = computed(() => props.markdownContent);
-  console.log(props.markdownContent);
 </script>
 
 <template>

@@ -8,9 +8,11 @@ import { defaultKeymap } from '@codemirror/commands';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { HighlightStyle, tags } from '@codemirror/highlight';
 import { useEditorStore } from '@/stores/editor';
+import { useNotesStore } from '@/stores/notes';
 
 export const useCodeMirror = () => {
   const editorStore = useEditorStore();
+  const notesStore = useNotesStore();
 
   /**
    * Theme
@@ -78,7 +80,7 @@ export const useCodeMirror = () => {
     syntaxHighlighting,
     EditorView.updateListener.of((v) => {
       if (v.docChanged) {
-        editorStore.setDocContent(v.state.doc.toString());
+        notesStore.updateNote(v.state.doc.toString());
       }
     }),
   ];
@@ -90,7 +92,7 @@ export const useCodeMirror = () => {
     console.log('codemirror mounted');
     const startState = EditorState.create({
       extensions,
-      doc: editorStore.getDocContent,
+      doc: notesStore.getCurrentNote.content,
     });
 
     const view = new EditorView({
@@ -100,8 +102,7 @@ export const useCodeMirror = () => {
 
     editorStore.mountCodeMirror(view);
 
-    // Load settings and doc content from state
-    editorStore.setMarkdownContent(editorStore.getDocContent);
+    // load settings
     lineNumbersConfig();
   });
 
@@ -110,6 +111,6 @@ export const useCodeMirror = () => {
   });
 
   return {
-    markdownContent: computed(() => editorStore.getMarkdownContent),
+    markdownContent: computed(() => notesStore.getMarkdownContent),
   };
 };
