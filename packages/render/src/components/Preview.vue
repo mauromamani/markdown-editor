@@ -22,7 +22,6 @@
 
     <button
       class="absolute top-2 right-6 py-2 px-1 bg-gray-200 hover:bg-gray-300 rounded text-sm text-gray-600 font-semibold transition duration-300"
-      @click.prevent="notesStore.createNote(notesStore.getNoteContent)"
     >
       Save Note
     </button>

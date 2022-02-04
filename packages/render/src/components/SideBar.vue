@@ -1,6 +1,33 @@
+<script setup lang="ts">
+  import { useNotesStore } from '@/stores/notes';
+
+  const notesStore = useNotesStore();
+</script>
+
 <template>
   <nav class="block bg-one-dark border-r-2 border-one-dark-100">
     <div class="w-[50px] flex flex-col items-center p-3 space-y-3">
+      <button
+        class="bg-one-dark hover:bg-one-dark-200 text-green-300 flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-lg"
+        type="button"
+        @click.prevent="notesStore.createNote()"
+      >
+        <span class="sr-only">New Note</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </button>
       <router-link
         :to="{ name: 'home' }"
         class="bg-one-dark hover:bg-one-dark-200 text-white flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-lg"

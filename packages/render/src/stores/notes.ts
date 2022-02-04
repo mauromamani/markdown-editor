@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { marked } from 'marked';
+import { useEditorStore } from './editor';
 
 interface NotesStoreState {
   currentNote: Note;
@@ -15,19 +16,31 @@ export const useNotesStore = defineStore('useNotesStore', {
   state: (): NotesStoreState => ({
     currentNote: {
       id: 0,
-      content: '# Create a New Note!',
+      content: '',
     },
     notes: [],
   }),
   actions: {
-    createNote(noteContent: string) {
+    createNote() {
+      const editorStore = useEditorStore();
+
       const newNote = {
         id: Math.random() * 100,
-        content: noteContent,
+        content: '# New note',
       };
 
+      const currentPosition = editorStore.view.state.doc.toString();
+      const endPosition = currentPosition.length;
+
+      editorStore.view.dispatch({
+        changes: {
+          from: 0,
+          to: endPosition,
+          insert: newNote.content,
+        },
+      });
+
       this.setCurrentNote(newNote);
-      this.saveNote(newNote);
     },
     saveNote(note: Note) {
       this.notes.push(note);
