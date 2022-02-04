@@ -16,7 +16,7 @@ export const useNotesStore = defineStore('useNotesStore', {
   state: (): NotesStoreState => ({
     currentNote: {
       id: 0,
-      content: '',
+      content: 'click to creat a new note',
     },
     notes: [],
   }),
@@ -29,6 +29,8 @@ export const useNotesStore = defineStore('useNotesStore', {
         content: '# New note',
       };
 
+      this.setCurrentNote(newNote);
+
       const currentPosition = editorStore.view.state.doc.toString();
       const endPosition = currentPosition.length;
 
@@ -39,11 +41,12 @@ export const useNotesStore = defineStore('useNotesStore', {
           insert: newNote.content,
         },
       });
-
-      this.setCurrentNote(newNote);
     },
     saveNote(note: Note) {
-      this.notes.push(note);
+      const exists = this.notes.findIndex((n) => n.id === note.id);
+      if (exists === -1) {
+        this.notes.push(note);
+      }
     },
     updateNoteContent(noteContent: string) {
       this.currentNote.content = noteContent;
