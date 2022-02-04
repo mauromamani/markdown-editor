@@ -20,6 +20,8 @@ function createWindow() {
       ? 'http://localhost:3000'
       : `file://${path.join(__dirname, '../../dist/index.html')}`
   );
+
+  win.setMenu(null);
 }
 
 app.whenReady().then(() => {
