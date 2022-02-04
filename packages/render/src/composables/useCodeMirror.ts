@@ -89,21 +89,23 @@ export const useCodeMirror = () => {
    * Mount CodeMirror
    */
   onMounted(() => {
-    console.log('codemirror mounted');
-    const startState = EditorState.create({
-      extensions,
-      doc: notesStore.getCurrentNote.content,
-    });
+    if (!editorStore.getIsMounted) {
+      console.log('codemirror mounted');
+      const startState = EditorState.create({
+        extensions,
+        doc: notesStore.getCurrentNote.content,
+      });
 
-    const view = new EditorView({
-      state: startState,
-      parent: document.getElementById('editor') as Element,
-    });
+      const view = new EditorView({
+        state: startState,
+        parent: document.getElementById('editor') as Element,
+      });
 
-    editorStore.mountCodeMirror(view);
+      editorStore.mountCodeMirror(view);
 
-    // load settings
-    lineNumbersConfig();
+      // load settings
+      lineNumbersConfig();
+    }
   });
 
   onUnmounted(() => {
