@@ -20,26 +20,28 @@ export const useNotesStore = defineStore('useNotesStore', {
     notes: [],
   }),
   actions: {
-    createNewNote(noteContent: string) {
+    createNote(noteContent: string) {
       const newNote = {
         id: Math.random() * 100,
         content: noteContent,
       };
 
-      this.notes.push(newNote);
+      this.setCurrentNote(newNote);
+      this.saveNote(newNote);
     },
     saveNote(note: Note) {
       this.notes.push(note);
     },
+    updateNoteContent(noteContent: string) {
+      this.currentNote.content = noteContent;
+    },
     setCurrentNote(note: Note) {
       this.currentNote = note;
-    },
-    updateNote(noteContent: string) {
-      this.currentNote.content = noteContent;
     },
   },
   getters: {
     getCurrentNote: (state) => state.currentNote,
+    getNoteContent: (state) => state.currentNote.content,
     getMarkdownContent: (state) => marked(state.currentNote.content),
   },
 });

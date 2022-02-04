@@ -80,7 +80,7 @@ export const useCodeMirror = () => {
     syntaxHighlighting,
     EditorView.updateListener.of((v) => {
       if (v.docChanged) {
-        notesStore.updateNote(v.state.doc.toString());
+        notesStore.updateNoteContent(v.state.doc.toString());
       }
     }),
   ];

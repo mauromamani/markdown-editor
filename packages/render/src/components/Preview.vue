@@ -1,11 +1,13 @@
 <script setup lang="ts">
+  import { useNotesStore } from '@/stores/notes';
   import { computed, defineProps } from 'vue';
 
   interface Props {
     markdownContent: string;
   }
-
   const props = defineProps<Props>();
+
+  const notesStore = useNotesStore();
 
   const content = computed(() => props.markdownContent);
 </script>
@@ -20,6 +22,7 @@
 
     <button
       class="absolute top-2 right-6 py-2 px-1 bg-gray-200 hover:bg-gray-300 rounded text-sm text-gray-600 font-semibold transition duration-300"
+      @click.prevent="notesStore.createNote(notesStore.getNoteContent)"
     >
       Save Note
     </button>
