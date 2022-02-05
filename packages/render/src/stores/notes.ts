@@ -59,5 +59,6 @@ export const useNotesStore = defineStore('useNotesStore', {
     getCurrentNote: (state) => state.currentNote,
     getNoteContent: (state) => state.currentNote.content,
     getMarkdownContent: (state) => marked(state.currentNote.content),
+    getNotesList: (state) => state.notes,
   },
 });

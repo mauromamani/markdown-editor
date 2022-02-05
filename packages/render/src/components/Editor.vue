@@ -3,6 +3,6 @@
 <template>
   <div
     id="editor"
-    class="w-full lg:w-1/2 h-1/2 lg:h-full overflow-y-auto"
+    class="w-full lg:w-1/2 h-1/2 lg:h-full overflow-y-auto flex-1"
   ></div>
 </template>

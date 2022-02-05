@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center px-2 py-1 text-gray-100 font-medium space-x-1 cursor-pointer bg-one-dark rounded-lg"
+    class="mt-1 flex items-center px-2 py-1 text-gray-100 font-medium space-x-1 cursor-pointer bg-one-dark rounded-lg"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

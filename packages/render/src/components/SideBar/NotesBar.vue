@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import NoteItem from '@/components/SideBar/NoteItem.vue';
+  import { useNotesStore } from '@/stores/notes';
+
+  const notesStore = useNotesStore();
 </script>
 
 <template>
@@ -10,7 +13,7 @@
       My Notes
     </h1>
     <div>
-      <note-item />
+      <note-item v-for="note in notesStore.getNotesList" :key="note.id" />
     </div>
   </div>
 </template>

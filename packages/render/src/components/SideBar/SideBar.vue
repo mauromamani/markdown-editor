@@ -32,8 +32,7 @@
         </svg>
       </button>
 
-      <router-link
-        :to="{ name: 'home' }"
+      <button
         class="bg-one-dark-500 hover:bg-one-dark-200 text-white flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-lg"
         @click.prevent="sidebarStore.showNotesBar()"
       >
@@ -52,7 +51,7 @@
             d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
           />
         </svg>
-      </router-link>
+      </button>
 
       <router-link
         :to="{ name: 'setting' }"
