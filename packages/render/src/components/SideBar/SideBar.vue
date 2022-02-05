@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { useNotesStore } from '@/stores/notes';
+  import { useSidebarStore } from '@/stores/sidebar';
+  import NotesBar from './NotesBar.vue';
 
   const notesStore = useNotesStore();
+  const sidebarStore = useSidebarStore();
 </script>
 
 <template>
@@ -28,9 +31,11 @@
           />
         </svg>
       </button>
+
       <router-link
         :to="{ name: 'home' }"
         class="bg-one-dark-500 hover:bg-one-dark-200 text-white flex-shrink-0 inline-flex items-center justify-center h-10 w-10 rounded-lg"
+        @click.prevent="sidebarStore.showNotesBar()"
       >
         <span class="sr-only">Home</span>
         <svg
@@ -77,4 +82,6 @@
       </router-link>
     </div>
   </nav>
+
+  <notes-bar v-show="sidebarStore.getIsShowNotesBar" />
 </template>
