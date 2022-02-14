@@ -7,7 +7,7 @@
   } from '@heroicons/vue/outline';
   import { useNotesStore } from '@/stores/notes';
   import { useSidebarStore } from '@/stores/sidebar';
-  import NotesBar from './NotesBar.vue';
+  import NotesBar from './SideBar/NotesBar.vue';
 
   const notesStore = useNotesStore();
   const sidebarStore = useSidebarStore();
