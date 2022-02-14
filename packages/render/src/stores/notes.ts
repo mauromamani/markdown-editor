@@ -12,6 +12,7 @@ export const useNotesStore = defineStore('useNotesStore', {
   state: (): NotesStoreState => ({
     currentNote: {
       id: 0,
+      title: '',
       content: 'click to creat a new note',
     },
     notes: [],
@@ -22,6 +23,7 @@ export const useNotesStore = defineStore('useNotesStore', {
 
       const newNote = {
         id: Math.random() * 100,
+        title: '',
         content: '# New note',
       };
 
@@ -39,6 +41,9 @@ export const useNotesStore = defineStore('useNotesStore', {
       });
     },
     saveNote(note: Note) {
+      const title = note.content.split(/\r?\n/)[0];
+      note.title = title;
+
       const exists = this.notes.findIndex((n) => n.id === note.id);
       if (exists === -1) {
         this.notes.push(note);
