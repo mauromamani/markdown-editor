@@ -13,7 +13,11 @@
       My Notes
     </h1>
     <div>
-      <note-item v-for="note in notesStore.getNotesList" :key="note.id" />
+      <note-item
+        v-for="note in notesStore.getNotesList"
+        :key="note.id"
+        :note="note"
+      />
     </div>
   </div>
 </template>
