@@ -1,15 +1,11 @@
 import { defineStore } from 'pinia';
 import { marked } from 'marked';
 import { useEditorStore } from './editor';
+import { Note } from '@/interfaces/notes';
 
 interface NotesStoreState {
   currentNote: Note;
   notes: Note[];
-}
-
-interface Note {
-  id: number;
-  content: string;
 }
 
 export const useNotesStore = defineStore('useNotesStore', {
