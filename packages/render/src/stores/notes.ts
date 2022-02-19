@@ -59,7 +59,25 @@ export const useNotesStore = defineStore('useNotesStore', {
   getters: {
     getCurrentNote: (state) => state.currentNote,
     getNoteContent: (state) => state.currentNote.content,
-    getMarkdownContent: (state) => marked(state.currentNote.content),
+    getMarkdownContent: (state) => {
+      const renderer = {
+        heading(text: string, level: never) {
+          if (level != 1) {
+            return `
+              <h${level}>
+                ${text}
+              </h${level}>
+            `;
+          }
+          return `
+            <h${level} style="text-align:center">
+              ${text}
+            </h${level}>`;
+        },
+      };
+      marked.use({ renderer });
+      return marked.parse(state.currentNote.content);
+    },
     getNotesList: (state) => state.notes,
   },
 });
