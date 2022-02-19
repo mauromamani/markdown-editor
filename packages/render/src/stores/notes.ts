@@ -19,8 +19,6 @@ export const useNotesStore = defineStore('useNotesStore', {
   }),
   actions: {
     createNote() {
-      const editorStore = useEditorStore();
-
       const newNote = {
         id: Math.random() * 100,
         title: '',
@@ -28,17 +26,6 @@ export const useNotesStore = defineStore('useNotesStore', {
       };
 
       this.setCurrentNote(newNote);
-
-      const currentPosition = editorStore.view.state.doc.toString();
-      const endPosition = currentPosition.length;
-
-      editorStore.view.dispatch({
-        changes: {
-          from: 0,
-          to: endPosition,
-          insert: newNote.content,
-        },
-      });
     },
     saveNote(note: Note) {
       const title = note.content.split(/\r?\n/)[0];
@@ -53,7 +40,20 @@ export const useNotesStore = defineStore('useNotesStore', {
       this.currentNote.content = noteContent;
     },
     setCurrentNote(note: Note) {
+      const editorStore = useEditorStore();
+
       this.currentNote = note;
+
+      const currentPosition = editorStore.view.state.doc.toString();
+      const endPosition = currentPosition.length;
+
+      editorStore.view.dispatch({
+        changes: {
+          from: 0,
+          to: endPosition,
+          insert: note.content,
+        },
+      });
     },
   },
   getters: {

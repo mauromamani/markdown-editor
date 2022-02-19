@@ -1,17 +1,21 @@
 <script setup lang="ts">
   import { defineProps } from 'vue';
   import { Note } from '@/interfaces/notes';
+  import { useNotesStore } from '@/stores/notes';
 
   interface Props {
     note: Note;
   }
 
   const props = defineProps<Props>();
+
+  const notesStore = useNotesStore();
 </script>
 
 <template>
   <div
     class="mt-1 flex items-center px-2 py-1 text-gray-100 font-medium space-x-1 cursor-pointer bg-one-dark rounded-lg"
+    @click.prevent="notesStore.setCurrentNote(note)"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
