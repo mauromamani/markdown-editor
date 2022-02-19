@@ -61,7 +61,7 @@ export const useNotesStore = defineStore('useNotesStore', {
     getNoteContent: (state) => state.currentNote.content,
     getMarkdownContent: (state) => {
       const renderer = {
-        heading(text: string, level: never) {
+        heading(text: string, level: number) {
           if (level != 1) {
             return `
               <h${level}>
@@ -73,6 +73,11 @@ export const useNotesStore = defineStore('useNotesStore', {
             <h${level} style="text-align:center">
               ${text}
             </h${level}>`;
+        },
+        image(href: string, _title: string, text: string) {
+          return `
+            <img src="${href}" alt="${text}" style="border-radius:10px" />
+          `;
         },
       };
       marked.use({ renderer });
