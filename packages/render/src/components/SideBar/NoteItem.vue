@@ -2,6 +2,7 @@
   import { defineProps } from 'vue';
   import { Note } from '@/interfaces/notes';
   import { useNotesStore } from '@/stores/notes';
+  import { useSidebarStore } from '@/stores/sidebar';
 
   interface Props {
     note: Note;
@@ -10,12 +11,18 @@
   const props = defineProps<Props>();
 
   const notesStore = useNotesStore();
+  const sidebarStore = useSidebarStore();
+
+  const setCurrentNote = () => {
+    notesStore.setCurrentNote(props.note);
+    sidebarStore.showNotesBar();
+  };
 </script>
 
 <template>
   <div
     class="mt-1 flex items-center px-2 py-1 text-gray-100 font-medium space-x-1 cursor-pointer bg-one-dark rounded-lg"
-    @click.prevent="notesStore.setCurrentNote(note)"
+    @click.prevent="setCurrentNote"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
