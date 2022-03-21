@@ -34,6 +34,7 @@ export const useNotesStore = defineStore('useNotesStore', {
       const exists = this.notes.findIndex((n) => n.id === note.id);
       if (exists === -1) {
         this.notes.push(note);
+        localStorage.setItem('notes', JSON.stringify(this.notes));
       }
     },
     updateNoteContent(noteContent: string) {
@@ -54,6 +55,9 @@ export const useNotesStore = defineStore('useNotesStore', {
           insert: note.content,
         },
       });
+    },
+    setNotes(notes: Note[]) {
+      this.notes = [...notes];
     },
   },
   getters: {
