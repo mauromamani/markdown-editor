@@ -35,6 +35,12 @@ export const useNotesStore = defineStore('useNotesStore', {
       if (exists === -1) {
         this.notes.push(note);
         localStorage.setItem('notes', JSON.stringify(this.notes));
+      } else {
+        const notes = this.notes.filter((n) =>
+          n.id === note.id ? { ...note } : n
+        );
+        this.setNotes(notes);
+        localStorage.setItem('notes', JSON.stringify(this.notes));
       }
     },
     updateNoteContent(noteContent: string) {
