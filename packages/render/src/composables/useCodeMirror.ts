@@ -9,6 +9,7 @@ import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { HighlightStyle, tags } from '@codemirror/highlight';
 import { useEditorStore } from '@/stores/editor';
 import { useNotesStore } from '@/stores/notes';
+import { Note } from '@/interfaces/notes';
 
 export const useCodeMirror = () => {
   const editorStore = useEditorStore();
@@ -90,7 +91,6 @@ export const useCodeMirror = () => {
    */
   onMounted(() => {
     if (!editorStore.getIsMounted) {
-      console.log('codemirror mounted');
       const startState = EditorState.create({
         extensions,
         doc: notesStore.getCurrentNote.content,
@@ -103,7 +103,13 @@ export const useCodeMirror = () => {
 
       editorStore.mountCodeMirror(view);
 
-      // load settings
+      // Load notes storaged in ls
+      const notesJSON = localStorage.getItem('notes');
+      if (notesJSON) {
+        const notes = JSON.parse(notesJSON);
+        notesStore.setNotes(notes as Note[]);
+      }
+      // Load settings
       lineNumbersConfig();
     }
   });
