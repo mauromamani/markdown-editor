@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import SideBar from '@/components/SideBar.vue';
+  import '@/assets/styles/scrollbar.css';
 </script>
 
 <template>

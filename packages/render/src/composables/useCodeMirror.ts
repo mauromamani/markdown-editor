@@ -26,6 +26,7 @@ export const useCodeMirror = () => {
       padding: '1rem',
     },
     '.cm-lineNumbers .cm-gutterElement': {},
+    '.cm-scroller': { overflow: 'auto' },
   });
 
   /**
