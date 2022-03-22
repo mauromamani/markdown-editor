@@ -1,8 +1,8 @@
 {
-  "name": "vue-electron-template",
-  "version": "0.0.0",
+  "name": "markdown-editor",
+  "version": "0.9.0",
   "main": "build/main/main.js",
-  "author": "author",
+  "author": "Mauro Mamani",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --emptyOutDir",
@@ -58,9 +58,9 @@
     "wait-on": "^6.0.0"
   },
   "build": {
-    "appId": "com.my-website.my-app",
-    "productName": "MyApp",
-    "copyright": "Copyright © 2019 ${author}",
+    "appId": "https://github.com/mauromamani/markdown-editor",
+    "productName": "Markdown Text Editor",
+    "copyright": "Copyright © 2022 ${author}",
     "mac": {
       "category": "public.app-category.utilities"
     },
