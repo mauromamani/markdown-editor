@@ -1,14 +1,12 @@
 import { defineStore } from 'pinia';
-import MarkdownIt from 'markdown-it';
 import { useEditorStore } from './editor';
 import { Note } from '@/interfaces/notes';
+import { renderMarkdown } from '@/plugins/markdown-it';
 
 interface NotesStoreState {
   currentNote: Note;
   notes: Note[];
 }
-
-const md = new MarkdownIt();
 
 export const useNotesStore = defineStore('useNotesStore', {
   state: (): NotesStoreState => ({
@@ -71,9 +69,7 @@ export const useNotesStore = defineStore('useNotesStore', {
   getters: {
     getCurrentNote: (state) => state.currentNote,
     getNoteContent: (state) => state.currentNote.content,
-    getMarkdownContent: (state) => {
-      return md.render(state.currentNote.content);
-    },
+    getMarkdownContent: (state) => renderMarkdown(state.currentNote.content),
     getNotesList: (state) => state.notes,
   },
 });
