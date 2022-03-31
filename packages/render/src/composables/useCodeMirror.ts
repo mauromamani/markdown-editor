@@ -4,7 +4,7 @@ import { EditorState, Compartment } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
-import { defaultKeymap } from '@codemirror/commands';
+import { indentWithTab } from '@codemirror/commands';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { HighlightStyle, tags } from '@codemirror/highlight';
 import { useEditorStore } from '@/stores/editor';
@@ -71,7 +71,7 @@ export const useCodeMirror = () => {
    */
   const extensions = [
     EditorView.lineWrapping,
-    keymap.of(defaultKeymap),
+    keymap.of([indentWithTab]),
     lineNumbersCompartment.of([]),
     highlightActiveLineGutter(),
     markdown({

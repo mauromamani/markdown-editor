@@ -53,15 +53,15 @@
     "@codemirror/view" "^0.19.0"
     "@lezer/common" "^0.15.0"
 
-"@codemirror/commands@^0.19.7":
-  version "0.19.7"
-  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-0.19.7.tgz#b55ccc7f3c1ad4cb0ec422d50c93568dbb05cc55"
-  integrity sha512-Mwh064xnuDbFw+9KJAi2Hmg8Va+YqQzgn6e/94/bSJavY3uuIBPr4vJp6pFEa1qPp40qs5/XJ01ty/0G3uLewA==
+"@codemirror/commands@^0.19.8":
+  version "0.19.8"
+  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-0.19.8.tgz#1f99c1a8bf200d17c4d6997379099459f3678107"
+  integrity sha512-65LIMSGUGGpY3oH6mzV46YWRrgao6NmfJ+AuC7jNz3K5NPnH6GCV1H5I6SwOFyVbkiygGyd0EFwrWqywTBD1aw==
   dependencies:
     "@codemirror/language" "^0.19.0"
     "@codemirror/matchbrackets" "^0.19.0"
     "@codemirror/state" "^0.19.2"
-    "@codemirror/text" "^0.19.0"
+    "@codemirror/text" "^0.19.6"
     "@codemirror/view" "^0.19.22"
     "@lezer/common" "^0.15.0"
 
@@ -193,7 +193,7 @@
   dependencies:
     "@codemirror/text" "^0.19.0"
 
-"@codemirror/text@^0.19.0", "@codemirror/text@^0.19.2":
+"@codemirror/text@^0.19.0", "@codemirror/text@^0.19.2", "@codemirror/text@^0.19.6":
   version "0.19.6"
   resolved "https://registry.yarnpkg.com/@codemirror/text/-/text-0.19.6.tgz#9adcbd8137f69b75518eacd30ddb16fd67bbac45"
   integrity sha512-T9jnREMIygx+TPC1bOuepz18maGq/92q2a+n4qTqObKwvNMg+8cMTslb8yxeEDEq7S3kpgGWxgO1UWbQRij0dA==

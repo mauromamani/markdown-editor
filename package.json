@@ -17,7 +17,7 @@
     "app:build": "yarn build:for:electron && yarn electron:builder"
   },
   "dependencies": {
-    "@codemirror/commands": "^0.19.7",
+    "@codemirror/commands": "^0.19.8",
     "@codemirror/gutter": "^0.19.9",
     "@codemirror/highlight": "^0.19.7",
     "@codemirror/lang-markdown": "^0.19.4",
