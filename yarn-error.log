@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\mauro\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add -D @types/markdown-it-task-lists
+  C:\Program Files\nodejs\node.exe C:\Users\mauro\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add -D @types/markdown-it-mark
 
 PATH: 
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\PuTTY\;C:\Users\mauro\AppData\Local\Microsoft\WindowsApps;C:\Users\mauro\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\mauro\AppData\Roaming\npm;C:\windows\system32
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fmarkdown-it-task-lists: Not found
+  Error: https://registry.yarnpkg.com/@types%2fmarkdown-it-mark: Not found
       at Request.params.callback [as _callback] (C:\Users\mauro\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:67029:18)
       at Request.self.callback (C:\Users\mauro\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
       at Request.emit (node:events:390:28)
@@ -58,6 +58,7 @@ npm manifest:
       "highlight.js": "^11.5.0",
       "markdown-it": "^12.3.2",
       "markdown-it-emoji": "^2.0.0",
+      "markdown-it-mark": "^3.0.1",
       "markdown-it-task-lists": "^2.1.1",
       "pinia": "^2.0.9",
       "vue": "^3.2.25",
@@ -2945,6 +2946,11 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/markdown-it-emoji/-/markdown-it-emoji-2.0.0.tgz#3164ad4c009efd946e98274f7562ad611089a231"
     integrity sha512-39j7/9vP/CPCKbEI44oV8yoPJTpvfeReTn/COgRhSpNrjWF3PfP/JUxxB0hxV6ynOY8KH8Y8aX9NMDdo6z+6YQ==
+  
+  markdown-it-mark@^3.0.1:
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/markdown-it-mark/-/markdown-it-mark-3.0.1.tgz#51257db58787d78aaf46dc13418d99a9f3f0ebd3"
+    integrity sha512-HyxjAu6BRsdt6Xcv6TKVQnkz/E70TdGXEFHRYBGLncRE9lBFwDNLVtFojKxjJWgJ+5XxUwLaHXy+2sGBbDn+4A==
   
   markdown-it-task-lists@^2.1.1:
     version "2.1.1"
