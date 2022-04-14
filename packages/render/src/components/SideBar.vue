@@ -1,10 +1,5 @@
 <script setup lang="ts">
-  import {
-    CodeIcon,
-    PlusCircleIcon,
-    FolderIcon,
-    CogIcon,
-  } from '@heroicons/vue/outline';
+  import { CodeIcon, PlusCircleIcon, FolderIcon } from '@heroicons/vue/outline';
   import { useNotesStore } from '@/stores/notes';
   import { useSidebarStore } from '@/stores/sidebar';
   import NotesBar from './SideBar/NotesBar.vue';
@@ -56,7 +51,7 @@
         </button>
       </div>
 
-      <div class="has-tooltip flex items-center">
+      <!-- <div class="has-tooltip flex items-center">
         <span
           class="tooltip rounded shadow-lg p-2 text-sm font-bold bg-one-dark-100 text-gray-100 ml-12"
           >Settings</span
@@ -68,7 +63,7 @@
           <span class="sr-only">Setting</span>
           <cog-icon class="h-6 w-6" />
         </router-link>
-      </div>
+      </div> -->
     </div>
   </nav>
 
