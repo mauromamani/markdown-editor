@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { ChevronDoubleRightIcon } from '@heroicons/vue/outline';
   import { useNotesStore } from '@/stores/notes';
   import { computed, defineProps } from 'vue';
 
@@ -19,6 +20,12 @@
       class="h-full py-10 px-8 markdown-body overflow-y-scroll break-words border-t-2 lg:border-t-0 border-l-0 lg:border-l-2 border-gray-700"
       v-html="content"
     ></div>
+
+    <button
+      class="absolute top-2 right-28 px-1 py-2 bg-gray-200 hover:bg-gray-300 rounded text-gray-600"
+    >
+      <chevron-double-right-icon class="h-5 w-5" />
+    </button>
 
     <button
       class="absolute top-2 right-6 py-2 px-1 bg-gray-200 hover:bg-gray-300 rounded text-sm text-gray-600 font-semibold transition duration-300"
