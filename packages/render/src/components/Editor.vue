@@ -6,8 +6,8 @@
 </script>
 
 <template>
-  <div class="relative w-full lg:w-1/2 h-1/2 lg:h-full overflow-y-auto flex-1">
-    <div id="editor" class="h-1/2 lg:h-full"></div>
+  <div class="relative w-full lg:w-1/2 overflow-y-auto flex-1">
+    <div id="editor" class="h-full"></div>
     <div class="absolute top-2 right-4 has-tooltip flex items-center">
       <span
         class="tooltip rounded shadow-lg p-2 text-sm font-bold bg-one-dark-100 text-gray-200 -ml-20"
