@@ -28,12 +28,13 @@
 <template>
   <div
     class="relative mt-1 flex items-center px-2 py-1 text-gray-100 font-medium space-x-1 cursor-pointer bg-one-dark rounded-lg"
-    @click.prevent="setCurrentNote"
   >
     <document-text-icon class="h-5 w-5 text-blue-300" />
-    <h2 class="text-base truncate w-[100%-20px]">{{ props.note.title }}</h2>
+    <h2 class="text-base truncate w-10/12" @click.prevent="setCurrentNote">
+      {{ props.note.title }}
+    </h2>
     <div class="absolute right-1" @click.prevent="deleteNote">
-      <trash-icon class="h-5 w-5 text-red-500" />
+      <trash-icon class="h-5 w-5 text-red-500 hover:text-red-700" />
     </div>
   </div>
 </template>
