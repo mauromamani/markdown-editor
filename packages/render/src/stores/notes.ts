@@ -43,6 +43,34 @@ export const useNotesStore = defineStore('useNotesStore', {
         localStorage.setItem('notes', JSON.stringify(this.notes));
       }
     },
+    deleteNote(id: number) {
+      const exists = this.notes.findIndex((n) => n.id === id);
+
+      // if note doesn´t exist return
+      if (exists === -1) return;
+
+      // if note to delete is current note reset values in editor and preview
+      if (this.currentNote.id === id) {
+        const editorStore = useEditorStore();
+
+        this.currentNote = {
+          id: 0,
+          title: '',
+          content: 'as',
+        };
+
+        editorStore.view.dispatch({
+          changes: {
+            from: 0,
+            to: 0,
+            insert: 'locura',
+          },
+        });
+      }
+
+      this.notes = this.notes.filter((n) => n.id != id);
+      localStorage.setItem('notes', JSON.stringify(this.notes));
+    },
     updateNoteContent(noteContent: string) {
       this.currentNote.content = noteContent;
     },

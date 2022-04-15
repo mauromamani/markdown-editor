@@ -20,8 +20,7 @@
   };
 
   const deleteNote = () => {
-    console.log({ note: props.note });
-    console.log('note deleted!');
+    notesStore.deleteNote(props.note.id);
   };
 </script>
 
