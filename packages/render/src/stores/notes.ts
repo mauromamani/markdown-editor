@@ -11,9 +11,9 @@ interface NotesStoreState {
 export const useNotesStore = defineStore('useNotesStore', {
   state: (): NotesStoreState => ({
     currentNote: {
-      id: 0,
+      id: Math.random() * 100,
       title: '',
-      content: 'click to creat a new note',
+      content: '# New note',
     },
     notes: [],
   }),
@@ -49,23 +49,9 @@ export const useNotesStore = defineStore('useNotesStore', {
       // if note doesn´t exist return
       if (exists === -1) return;
 
-      // if note to delete is current note reset values in editor and preview
+      // if note to delete and current note are the same, create a new note
       if (this.currentNote.id === id) {
-        const editorStore = useEditorStore();
-
-        this.currentNote = {
-          id: 0,
-          title: '',
-          content: 'as',
-        };
-
-        editorStore.view.dispatch({
-          changes: {
-            from: 0,
-            to: 0,
-            insert: 'locura',
-          },
-        });
+        this.createNote();
       }
 
       this.notes = this.notes.filter((n) => n.id != id);
