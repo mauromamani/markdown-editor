@@ -1,4 +1,4 @@
-# 📝 Markdown Editor - Desktop App (🔨 Building...)
+# 📝 Markdown Editor - Desktop App
 
 ### 📚Libraries
 - [vite](https://github.com/vitejs/vite)
