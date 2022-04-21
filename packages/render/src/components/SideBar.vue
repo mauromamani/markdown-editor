@@ -9,8 +9,8 @@
 </script>
 
 <template>
-  <nav class="block bg-one-dark-500 border-r-2 border-one-dark-100">
-    <div class="w-[50px] flex flex-col items-center p-3 space-y-3">
+  <nav class="w-[52px] block bg-one-dark-500 border-r-2 border-one-dark-100">
+    <div class="flex flex-col items-center p-3 space-y-3">
       <div class="has-tooltip flex items-center">
         <span
           class="tooltip rounded shadow-lg p-2 text-sm font-bold bg-one-dark-100 text-green-300 ml-12"
